@@ -1,3 +1,4 @@
+import Prelude hiding (minimum,maximum)
 import Test.HUnit
 data Maybe x = Just x | Nothing
 --Escreva a declaracao para o tipo Triple, contendo tres elementos, todos de tipos diferentes.
@@ -72,14 +73,14 @@ search x (Node a (left) (right)) = if x == a
     else search x (right))
 
 --retorna no com elmento maximo da BST
---maximum NIL = NIL
---maximum (Node a left NIL) = Node a left NIL
---maximum (Node a left right)= Main.maximum right
+maximum NIL = NIL
+maximum (Node a left NIL) = Node a left NIL
+maximum (Node a left right)= Main.maximum right
 
 --retorna no com elemento minimo da BST
---minimum NIL = NIL
---minimum (Node a NIL right) = (Node a NIL right)
---minimum (Node a left right)= Main.minimum left
+minimum NIL = NIL
+minimum (Node a NIL right) = (Node a NIL right)
+minimum (Node a left right)= Main.minimum left
 
 --retorna o predecessor de um elemento da BST, caso o elemento esteja na BST
 predecessor x (Node a left right) = if search x (Node a left right) /= NIL
@@ -154,11 +155,11 @@ testsearch1 = TestCase (assertEqual "search tree's node " (Node 90 NIL (Node 100
 testsearch2 = TestCase (assertEqual "search tree's root" (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL))) (search 10 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
 testsearch3 = TestCase (assertEqual "search for node that hasn't in tree" NIL (search 110 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
 
---testmaximum1 = TestCase (assertEqual "testmaximum1" 20  (maximum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
---testmaximum2 = TestCase (assertEqual "testmaximum2" 9  (maximum (Node 5 NIL (Node 6 NIL (Node 7 NIL (Node 8 NIL (Node 9 NIL NIL)))) ) ))
+testmaximum1 = TestCase (assertEqual "testmaximum1" (Node 20 NIL NIL) (maximum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
+testmaximum2 = TestCase (assertEqual "testmaximum2" (Node 9 (Node (8.5) NIL NIL) NIL)  (maximum (Node 5 NIL (Node 6 NIL (Node 7 NIL (Node 8 NIL (Node 9 (Node (8.5) NIL NIL) NIL)))) ) ))
 
---testminimum1 = TestCase (assertEqual "testminimum1" 5  (minimum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
---testminimum2 = TestCase (assertEqual "testminimum2" 1  (minimum (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL NIL) NIL) NIL) NIL) NIL) ))
+testminimum1 = TestCase (assertEqual "testminimum1" (Node 5 NIL NIL)  (minimum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
+testminimum2 = TestCase (assertEqual "testminimum2" (Node 1 NIL (Node 1.5 NIL NIL))  (minimum (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL (Node 1.5 NIL NIL)) NIL) NIL) NIL) NIL) ))
 
 testpredecessor1 = TestCase (assertEqual "predecessor in some lower position" 1  (predecessor 2 (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL NIL) NIL) NIL) NIL) NIL) ))
 testpredecessor2 = TestCase (assertEqual "predecessor in some higher position" 90  (predecessor 100 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
@@ -175,4 +176,8 @@ testpreorder = TestCase (assertEqual "testpreorder" [3,2,1,4] (preOrder (Node 3 
 testorder = TestCase (assertEqual "testorder" [1,2,3,4] (order (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
 testpostorder = TestCase (assertEqual "testpostorder" [1,2,4,3] (postOrder (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
 
-tests = TestList [testsize1,testsize2,testsize3,testisbst1,testisbst2,testisbst3,testinsert1,testinsert2,testinsert3,testsearch1,testsearch2,testsearch3,testpredecessor1,testpredecessor2,testsuccessor1,testsuccessor2,testremove1,testremove2,testremove3,testremove4,testpreorder,testorder,testpostorder]
+tests = TestList [testsize1,testsize2,testsize3,testisbst1,testisbst2,
+ testisbst3,testinsert1,testinsert2,testinsert3,testsearch1,testsearch2,
+ testsearch3,testpredecessor1,testpredecessor2,testsuccessor1,testsuccessor2,
+ testremove1,testremove2,testremove3,testremove4,testpreorder,testorder,
+ testpostorder,testmaximum1,testmaximum2,testminimum1,testminimum2]
