@@ -11,10 +11,15 @@ module ProgFuncLista
       remove,
       preOrder,
       order,
-      postOrder
+      postOrder,
+      matricula
     ) where
 
 import Prelude hiding (minimum,maximum)
+
+--Digite abaixo a sua matricula
+matricula = 123456789 :: Int
+--Digite acima a sua matricula
 
 data Maybe x = Just x | Nothing
 --Escreva a declaracao para o tipo Triple, contendo tres elementos, todos de tipos diferentes.

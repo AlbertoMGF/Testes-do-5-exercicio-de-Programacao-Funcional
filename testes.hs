@@ -1,3 +1,7 @@
+module Testes
+    (testBST
+    ) where
+
 import Prelude hiding (minimum,maximum)
 import ProgFuncLista
 import Test.HUnit
@@ -21,7 +25,7 @@ testsearch3 = TestCase (assertEqual "search for node that hasn't in tree" NIL (s
 testsearch4 = TestCase (assertEqual "search for node with data in repetition in tree" (Node 110 NIL (Node 110 NIL NIL)) (search 110 (Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 110 NIL NIL)))))
 
 testmaximum1 = TestCase (assertEqual "testmaximum1" (Node 20 NIL NIL) (maximum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
-testmaximum2 = TestCase (assertEqual "testmaximum2" (Node 9 (Node (8.5) NIL NIL) NIL)  (maximum (Node 5 NIL (Node 6 NIL (Node 7 NIL (Node 8 NIL (Node 9 (Node (8.5) NIL NIL) NIL)))) ) ))
+testmaximum2 = TestCase (assertEqual "testmaximum2" (Node 9 (Node 8.5 NIL NIL) NIL)  (maximum (Node 5 NIL (Node 6 NIL (Node 7 NIL (Node 8 NIL (Node 9 (Node 8.5 NIL NIL) NIL)))) ) ))
 
 testminimum1 = TestCase (assertEqual "testminimum1" (Node 5 NIL NIL)  (minimum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
 testminimum2 = TestCase (assertEqual "testminimum2" (Node 1 NIL (Node 1.5 NIL NIL))  (minimum (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL (Node 1.5 NIL NIL)) NIL) NIL) NIL) NIL) ))
