@@ -1,55 +1,145 @@
 module Testes
-    (testBST
+    (mytests
     ) where
 
-import Prelude hiding (minimum,maximum)
+import Prelude hiding (minimum,maximum,Just,Nothing,Maybe)
 import ProgFuncLista
 import Test.HUnit
+import SetupTestes
 
-testsize1 = TestCase (assertEqual "size of empty tree" 0 (sizeBST NIL))
-testsize2 = TestCase (assertEqual "size of very unbalanced tree" 5 (sizeBST (Node 3 NIL (Node 4 NIL (Node 5 NIL (Node 9 (Node 7 NIL NIL) NIL))) )))
-testsize3 = TestCase (assertEqual "size of balanced tree" 3 (sizeBST (Node 3 (Node (-1) NIL NIL) (Node 4 NIL NIL))))
+testtripleFst = TestCase (assertEqual "get first element of Triple"
+ 1 (tripleFst someTriple))
+testtripleSnd = TestCase (assertEqual "get second element of Triple"
+ "w" (tripleSnd someTriple))
+testtripleThr = TestCase (assertEqual "get third element of Triple"
+ 5.0 (tripleThr someTriple))
 
-testisBST1 = TestCase (assertEqual "correct BST tree" True (isBST (Node 10 (Node 0 NIL (Node 5 NIL NIL)) (Node 20 (Node 15 NIL NIL) (Node 40 NIL NIL)))))
-testisBST2 = TestCase (assertEqual "node with 7 in wrong position" False (isBST (Node 10 (Node 5 (Node 1 NIL NIL) (Node 6 NIL NIL)) (Node 20 (Node 7 NIL NIL) (Node 99 NIL NIL)))))
-testisBST3 = TestCase (assertEqual "node with 17 in wrong position" False (isBST (Node 10 (Node 5 NIL (Node 17 NIL NIL)) (Node 20 NIL NIL))))
+testquadrupleFirstTwo = TestCase (assertEqual "get first and second elements of Quadruple"
+ ("min","gau") (firstTwo someQuadruple))
+testquadrupleSecondTwo = TestCase (assertEqual "get third and fourty elements of Quadruple"
+ (19,60) (secondTwo someQuadruple))
 
-testinsert1 = TestCase (assertEqual "insert in left position" (Node 10 (Node 5 NIL NIL) (Node 20 (Node 17 NIL NIL) NIL)) (insert 17 (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
-testinsert2 = TestCase (assertEqual "insert in right position" (Node 10 (Node 5 NIL NIL) (Node 20 NIL (Node 22 NIL NIL))) (insert 22 (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
-testinsert3 = TestCase (assertEqual "insert in an empty tree" (Node 40 NIL NIL) (insert 40  NIL))
-testinsert4 = TestCase (assertEqual "insert an element that has already in the tree" (Node 20 NIL (Node 20 NIL (Node 20 NIL NIL))) (insert 20  (Node 20 NIL (Node 20 NIL NIL))))
+testTuple1A = TestCase (assertEqual "get first element of Tuple"
+ (Just "alfa") (tuple1 someTupleA))
+testTuple1B = TestCase (assertEqual "get first element of Tuple"
+ (Just "alfa") (tuple1 someTupleB))
+testTuple1C = TestCase (assertEqual "get first element of Tuple"
+ (Just "alfa") (tuple1 someTupleC))
+testTuple1D = TestCase (assertEqual "get first element of Tuple"
+ (Just "alfa") (tuple1 someTupleD))
 
-testsearch1 = TestCase (assertEqual "search tree's node " (Node 90 NIL (Node 100 NIL NIL)) (search 90 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testsearch2 = TestCase (assertEqual "search tree's root" (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL))) (search 10 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testsearch3 = TestCase (assertEqual "search for node that hasn't in tree" NIL (search 110 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testsearch4 = TestCase (assertEqual "search for node with data in repetition in tree" (Node 110 NIL (Node 110 NIL NIL)) (search 110 (Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 110 NIL NIL)))))
+testTuple2A = TestCase (assertEqual "get second element of Tuple"
+ (Nothing::Maybe [Char]) (tuple2 someTupleA))
+testTuple2B = TestCase (assertEqual "get second element of Tuple"
+ (Just "bravo") (tuple2 someTupleB))
+testTuple2C = TestCase (assertEqual "get second element of Tuple"
+ (Just "bravo") (tuple2 someTupleC))
+testTuple2D = TestCase (assertEqual "get second element of Tuple"
+ (Just "bravo") (tuple2 someTupleD))
 
-testmaximum1 = TestCase (assertEqual "testmaximum1" (Node 20 NIL NIL) (maximum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
-testmaximum2 = TestCase (assertEqual "testmaximum2" (Node 9 (Node 8.5 NIL NIL) NIL)  (maximum (Node 5 NIL (Node 6 NIL (Node 7 NIL (Node 8 NIL (Node 9 (Node 8.5 NIL NIL) NIL)))) ) ))
+testTuple3A = TestCase (assertEqual "get third element of Tuple"
+ (Nothing::Maybe [Char]) (tuple3 someTupleA))
+testTuple3B = TestCase (assertEqual "get third element of Tuple"
+ (Nothing::Maybe [Char]) (tuple3 someTupleB))
+testTuple3C = TestCase (assertEqual "get third element of Tuple"
+ (Just "charlie") (tuple3 someTupleC))
+testTuple3D = TestCase (assertEqual "get third element of Tuple"
+ (Just "charlie") (tuple3 someTupleD))
 
-testminimum1 = TestCase (assertEqual "testminimum1" (Node 5 NIL NIL)  (minimum (Node 10 (Node 5 NIL NIL) (Node 20 NIL NIL)) ))
-testminimum2 = TestCase (assertEqual "testminimum2" (Node 1 NIL (Node 1.5 NIL NIL))  (minimum (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL (Node 1.5 NIL NIL)) NIL) NIL) NIL) NIL) ))
+testTuple4A = TestCase (assertEqual "get fourth element of Tuple"
+ (Nothing::Maybe [Char]) (tuple4 someTupleA))
+testTuple4B = TestCase (assertEqual "get fourth element of Tuple"
+ (Nothing::Maybe [Char]) (tuple4 someTupleB))
+testTuple4C = TestCase (assertEqual "get fourth element of Tuple"
+ (Nothing::Maybe [Char]) (tuple4 someTupleC))
+testTuple4D = TestCase (assertEqual "get fourth element of Tuple"
+ (Just "delta") (tuple4 someTupleD))
 
-testpredecessor1 = TestCase (assertEqual "predecessor in some lower position" 1  (predecessor 2 (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL NIL) NIL) NIL) NIL) NIL) ))
-testpredecessor2 = TestCase (assertEqual "predecessor in some higher position" 90  (predecessor 100 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
+testsize1 = TestCase (assertEqual "size of empty tree"
+ 0 (sizeBST emptyBST))
+testsize2 = TestCase (assertEqual "size of very unbalanced tree"
+ 5 (sizeBST unbalanceBST))
+testsize3 = TestCase (assertEqual "size of balanced tree"
+ 3 (sizeBST littleBST))
 
-testsuccessor1 = TestCase (assertEqual "successor in some lower position" 100  (successor 90 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testsuccessor2 = TestCase (assertEqual "successor in some higher position" 3  (successor 2 (Node 5 (Node 4 (Node 3 (Node 2 (Node 1 NIL NIL) NIL) NIL) NIL) NIL) ))
+testisBST1 = TestCase (assertEqual "correct BST tree"
+ True (isBST correctBST))
+testisBST2 = TestCase (assertEqual "node with 7 in wrong position"
+ False (isBST incorrectBST1))
+testisBST3 = TestCase (assertEqual "node with 17 in wrong position"
+ False (isBST incorrectBST2))
+testisBST4 = TestCase (assertEqual "correct BST tree"
+ True (isBST unbalanceBST))
 
-testremove1 = TestCase (assertEqual "remove node without children" (Node 10 (Node 2 NIL NIL) NIL) (remove 20 (Node 10 (Node 2 NIL NIL) (Node 20 NIL NIL))))
-testremove2 = TestCase (assertEqual "remove node that hasn't in tree" (Node 10 (Node 2 NIL NIL) (Node 20 NIL NIL)) (remove 90 (Node 10 (Node 2 NIL NIL) (Node 20 NIL NIL))))
-testremove3 = TestCase (assertEqual "remove node with single children" (Node 10 (Node 2 NIL NIL) (Node 100 NIL NIL)) (remove 90 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testremove4 = TestCase (assertEqual "remove node with dual childrens (get successor's way)" (Node 90 (Node 2 NIL NIL) (Node 100 NIL NIL)) (remove 10 (Node 10 (Node 2 NIL NIL) (Node 90 NIL (Node 100 NIL NIL)))))
-testremove5 = TestCase (assertEqual "remove node with data in repetition in tree and the first occurrence have single children" (Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 160 NIL NIL))) (remove 110 (Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 110 NIL (Node 160 NIL NIL))))))
-testremove6 = TestCase (assertEqual "remove node with data in repetition in tree and the first occurrence have dual children" (Node 10 (Node 2 NIL NIL) (Node 110 (Node 80 NIL NIL) (Node 160 NIL NIL))) (remove 110 (Node 10 (Node 2 NIL NIL) (Node 110 (Node 80 NIL NIL) (Node 110 NIL (Node 160 NIL NIL))))))
+testinsert1 = TestCase (assertEqual "insert in left position"
+ expectedInsert1 (insert 17 littleBST ))
+testinsert2 = TestCase (assertEqual "insert in right position"
+ expectedInsert2 (insert 22 littleBST ))
+testinsert3 = TestCase (assertEqual "insert in an empty tree"
+ (Node 40 NIL NIL) (insert 40  emptyBST))
+testinsert4 = TestCase (assertEqual "insert an element that has already in the tree"
+ expectedInsert3 (insert 20  bstWithRepetition))
 
-testpreorder = TestCase (assertEqual "testpreorder" [3,2,1,4] (preOrder (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
-testorder = TestCase (assertEqual "testorder" [1,2,3,4] (order (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
-testpostorder = TestCase (assertEqual "testpostorder" [1,2,4,3] (postOrder (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
+testsearch1 = TestCase (assertEqual "search tree's node "
+ forSearch3 (search 90 forSearch2))
+testsearch2 = TestCase (assertEqual "search tree's root"
+ forSearch2 (search 10 forSearch2))
+testsearch3 = TestCase (assertEqual "search for node that hasn't in tree"
+ emptyBST (search 110 forSearch2))
+testsearch4 = TestCase (assertEqual "search for node with data in repetition in tree"
+ forSearch5 (search 110 forSearch4))
+
+testmaximum1 = TestCase (assertEqual "search maximum without children"
+ (Node 20 NIL NIL) (maximum littleBST))
+testmaximum2 = TestCase (assertEqual "search maximum with children"
+ maximumNode (maximum unbalancetoright))
+
+testminimum1 = TestCase (assertEqual "search minimum without children"
+ (Node 0 NIL NIL)  (minimum littleBST))
+testminimum2 = TestCase (assertEqual "search minimum with children"
+ minimumNode  (minimum unbalancetoleft))
+
+testpredecessor1 = TestCase (assertEqual "predecessor in some lower position"
+ 2  (predecessor 3 unbalancetoleft))
+testpredecessor2 = TestCase (assertEqual "predecessor in some higher position"
+ 90  (predecessor 100 forSearch2))
+
+testsuccessor1 = TestCase (assertEqual "successor in some lower position"
+ 100  (successor 90 forSearch2))
+testsuccessor2 = TestCase (assertEqual "successor in some higher position"
+ 3  (successor 2 unbalancetoleft))
+
+testremove1 = TestCase (assertEqual "remove node without children"
+ expectedRemove1 (remove 20 littleBST))
+testremove2 = TestCase (assertEqual "remove node that hasn't in tree"
+ littleBST (remove 90 littleBST))
+testremove3 = TestCase (assertEqual "remove node with single children"
+ expectedRemove2 (remove 90 forSearch2))
+testremove4 = TestCase (assertEqual "remove node with dual childrens (get successor's way)"
+ expectedRemove3 (remove 10 forSearch2))
+testremove5 = TestCase (assertEqual "remove node with data in repetition in tree and the first occurrence have single children"
+ expectedRemove4 (remove 110 bstWithRepetition1))
+testremove6 = TestCase (assertEqual "remove node with data in repetition in tree and the first occurrence have dual children"
+ expectedRemove5 (remove 110 bstWithRepetition2))
+
+testpreorder = TestCase (assertEqual "testpreorder"
+ [3,2,1,4] (preOrder (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
+testorder = TestCase (assertEqual "testorder"
+ [1,2,3,4] (order (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
+testpostorder = TestCase (assertEqual "testpostorder"
+ [1,2,4,3] (postOrder (Node 3 (Node 2 (Node 1 NIL NIL) NIL) (Node 4 NIL NIL))))
+
+mytests = TestList [testFirstStructures,testBST]
+
+testFirstStructures = TestList [testtripleFst,testtripleSnd,testtripleThr,
+ testquadrupleFirstTwo,testquadrupleSecondTwo,testTuple1A,testTuple1B,
+ testTuple1C,testTuple1D,testTuple2A,testTuple2B,testTuple2C,testTuple2D,
+ testTuple3A,testTuple3B,testTuple3C,testTuple3D,testTuple4A,testTuple4B,
+ testTuple4C,testTuple4D]
 
 testBST = TestList [testsize1,testsize2,testsize3,testisBST1,testisBST2,
  testisBST3,testinsert1,testinsert2,testinsert3,testsearch1,testsearch2,
  testsearch3,testpredecessor1,testpredecessor2,testsuccessor1,testsuccessor2,
  testremove1,testremove2,testremove3,testremove4,testpreorder,testorder,
  testpostorder,testmaximum1,testmaximum2,testminimum1,testminimum2,testsearch4,
- testinsert4,testremove5,testremove6]
+ testinsert4,testremove5,testremove6,testisBST4]

@@ -1,5 +1,6 @@
 module ProgFuncLista
-    ( BinaryTree(Node,NIL),
+    ( Maybe(Just,Nothing),
+      BinaryTree(Node,NIL),
       sizeBST,
       isBST,
       insert,
@@ -12,16 +13,28 @@ module ProgFuncLista
       preOrder,
       order,
       postOrder,
-      matricula
+      matricula,
+      Triple(Triple),
+      tripleFst,
+      tripleSnd,
+      tripleThr,
+      Quadruple(Quadruple),
+      firstTwo,
+      secondTwo,
+      Tuple(TupleA,TupleB,TupleC,TupleD),
+      tuple1,
+      tuple2,
+      tuple3,
+      tuple4
     ) where
 
-import Prelude hiding (minimum,maximum)
+import Prelude hiding (minimum,maximum,Just,Nothing,Maybe)
 
 --Digite abaixo a sua matricula
 matricula = 123456789 :: Int
 --Digite acima a sua matricula
 
-data Maybe x = Just x | Nothing
+data Maybe x = Just x | Nothing  deriving (Eq,Show)
 --Escreva a declaracao para o tipo Triple, contendo tres elementos, todos de tipos diferentes.
 --Escreva funcoes tripleFst, tripleSnd, tripleThr para extrair respectivamente o primeiro, segundo e terceiro
 -- elementos de uma triple.
@@ -33,7 +46,7 @@ tripleThr (Triple a b c) = c
 
 --Escreva um tipo Quadruple que contem 4 elementos: dois de um mesmo tipo e outros dois de outro tipo
 --Escreva as funcoes frstTwo e secondTwo que retornam os dois primeiros e os dois ultimos, respectivamente
-data Quadruple a b = Quadruple a a b b
+data Quadruple a b = Quadruple a a b b deriving (Eq,Show)
 
 firstTwo (Quadruple a b c d) = (a,b)
 secondTwo (Quadruple a b c d) = (c,d)
@@ -42,10 +55,25 @@ secondTwo (Quadruple a b c d) = (c,d)
 --Implemente funções tuple1 até tuple4 que que retornam Just <valor> ou Nothing se o valor nao existe
 data Tuple a b c d = TupleA a | TupleB a b | TupleC a b c | TupleD a b c d  deriving (Eq,Show)
 
-tuple1 = undefined
-tuple2 = undefined
-tuple3 = undefined
-tuple4 = undefined
+tuple1 (TupleA a) = Just a
+tuple1 (TupleB a b) = Just a
+tuple1 (TupleC a b c) = Just a
+tuple1 (TupleD a b c d) = Just a
+
+tuple2 (TupleA a) = Nothing
+tuple2 (TupleB a b) = Just b
+tuple2 (TupleC a b c) = Just b
+tuple2 (TupleD a b c d) = Just b
+
+tuple3 (TupleA a) = Nothing
+tuple3 (TupleB a b) = Nothing
+tuple3 (TupleC a b c) = Just c
+tuple3 (TupleD a b c d) = Just c
+
+tuple4 (TupleA a) = Nothing
+tuple4 (TupleB a b) = Nothing
+tuple4 (TupleC a b c) = Nothing
+tuple4 (TupleD a b c d) = Just d
 
 data List a = Nil | Cons a (List a) deriving (Eq,Show)
 

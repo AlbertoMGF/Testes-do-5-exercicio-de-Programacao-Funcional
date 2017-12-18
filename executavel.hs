@@ -4,7 +4,7 @@ import Testes
 import ProgFuncLista
 
 main = do
-  tests <- (runTestTT testBST)
+  tests <- (runTestTT mytests)
   let bd = words (showCounts tests)
   let success = read (bd !! 1) - read (bd !! 5) - read (bd !! 7)
   let results = [matricula, read (bd !! 1), read (bd !! 5), read(bd !! 7), success]
