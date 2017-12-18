@@ -25,7 +25,13 @@ module ProgFuncLista
       tuple1,
       tuple2,
       tuple3,
-      tuple4
+      tuple4,
+      List(Nil,Cons),
+      listLength,
+      listHead,
+      listTail,
+      listFoldr,
+      listFoldl
     ) where
 
 import Prelude hiding (minimum,maximum,Just,Nothing,Maybe)

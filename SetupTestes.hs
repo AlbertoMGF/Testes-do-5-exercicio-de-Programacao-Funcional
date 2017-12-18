@@ -31,7 +31,13 @@ module SetupTestes
      expectedRemove4,
      bstWithRepetition1,
      expectedRemove5,
-     bstWithRepetition2
+     bstWithRepetition2,
+     emptyList,
+     listWith6Elem,
+     expectedTail1,
+     expectedRemove6,
+     expectedRemove7,
+     forRemove
     ) where
 
 import ProgFuncLista
@@ -44,6 +50,11 @@ someTupleA = TupleA "alfa"
 someTupleB = TupleB "alfa" "bravo"
 someTupleC = TupleC "alfa" "bravo" "charlie"
 someTupleD = TupleD "alfa" "bravo" "charlie" "delta"
+
+--List
+emptyList = Nil
+listWith6Elem = Cons 1 expectedTail1
+expectedTail1 = (Cons 2 (Cons 3 (Cons 4 (Cons 5 (Cons 6 Nil)))))
 
 basicBST a b c d = Node 10 (Node 0 a b) (Node 20 c d)
 
@@ -86,3 +97,6 @@ bstWithRepetition1 = Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 110 NIL (Node 
 expectedRemove4 = Node 10 (Node 2 NIL NIL) (Node 110 NIL (Node 160 NIL NIL))
 bstWithRepetition2 = Node 10 (Node 2 NIL NIL) (Node 110 (Node 80 NIL NIL) (Node 110 NIL (Node 160 NIL NIL)))
 expectedRemove5 = Node 10 (Node 2 NIL NIL) (Node 110 (Node 80 NIL NIL) (Node 160 NIL NIL))
+expectedRemove6 = (Node 10 NIL forSearch3)
+forRemove = basicBST (Node (-1) (Node (-10) NIL NIL) NIL) NIL NIL NIL
+expectedRemove7 = basicBST (Node (-10) NIL NIL) NIL NIL NIL
